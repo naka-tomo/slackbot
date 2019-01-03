@@ -1,3 +1,34 @@
+# IFTTT対応slackbot
+
+デフォルトのslackbotでは，IFTTTから投稿されたメッセージを受け取れません．
+これは，slackから送られてくるメッセージの形式と，通常のメッセージの形式が違うからのようです．
+そこで，以下のように`dispatch_msg`でメッセージの形式を，通常のメッセージの形式に合わせることで対応しています．
+
+```
+if not "text" in msg: 
+    msg["text"] = msg['attachments'][0]["pretext"]
+    msg["user"] = "AAAA"
+```
+
+IFTTTからのメッセージでは`text`フィールドがなく，`['attachments'][0]["pretext"]`に投稿内容が含まれているので，
+`text`フィールドに入れ直します．
+さらに，本来ユーザ固有のIDが入る`user`フィールドもないので，適当なID`AAAA`を入れています．
+適当なIDなので，userに関する情報は`None`になります．なので，以下のようにするとIFTTTからの投稿かどうかを判断できます．
+
+```
+@listen_to(r'.+')
+def listen_func(message):
+    if message.user!=None:
+        # IFTTTからの投稿
+    else:
+        # 既存のユーザからの投稿
+```
+
+また，日本語へ対応するため，一部の文字列をユニコードにしています．
+変更箇所は[こちらのコミット](https://github.com/naka-tomo/slackbot/commit/b74f5b6c634c537d186173417c5480a7c7250ef9)を参照してください．
+
+---
+
 [![PyPI](https://badge.fury.io/py/slackbot.svg)](https://pypi.python.org/pypi/slackbot) [![Build Status](https://secure.travis-ci.org/lins05/slackbot.svg?branch=master)](http://travis-ci.org/lins05/slackbot)
 
 A chat bot for [Slack](https://slack.com) inspired by [llimllib/limbo](https://github.com/llimllib/limbo) and [will](https://github.com/skoczen/will).
