@@ -41,6 +41,11 @@ class MessageDispatcher(object):
     def dispatch_msg(self, msg):
         category = msg[0]
         msg = msg[1]
+
+        if not "text" in msg: 
+            msg["text"] = msg['attachments'][0]["pretext"]
+            msg["user"] = "AAAA"
+
         if not self._dispatch_msg_handler(category, msg):
             if category == u'respond_to':
                 if not self._dispatch_msg_handler('default_reply', msg):
@@ -63,11 +68,11 @@ class MessageDispatcher(object):
                     if self._errors_to:
                         self._client.rtm_send_message(msg['channel'], reply)
                         self._client.rtm_send_message(self._errors_to,
-                                                      '{}\n{}'.format(reply,
+                                                      u'{}\n{}'.format(reply,
                                                                       tb))
                     else:
                         self._client.rtm_send_message(msg['channel'],
-                                                      '{}\n{}'.format(reply,
+                                                      u'{}\n{}'.format(reply,
                                                                       tb))
         return responded
 
