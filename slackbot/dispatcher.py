@@ -42,7 +42,7 @@ class MessageDispatcher(object):
         category = msg[0]
         msg = msg[1]
 
-        if not "text" in msg: 
+        if msg["username"] == "IFTTT":
             msg["text"] = msg['attachments'][0]["pretext"]
             msg["user"] = "AAAA"
 
