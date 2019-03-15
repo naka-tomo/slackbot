@@ -5,7 +5,7 @@
 そこで，以下のように`dispatch_msg`でメッセージの形式を，通常のメッセージの形式に合わせることで対応しています．
 
 ```
-if not "text" in msg: 
+if msg["username"] == "IFTTT":
     msg["text"] = msg['attachments'][0]["pretext"]
     msg["user"] = "AAAA"
 ```
@@ -25,7 +25,10 @@ def listen_func(message):
 ```
 
 また，日本語へ対応するため，一部の文字列をユニコードにしています．
-変更箇所は[こちらのコミット](https://github.com/naka-tomo/slackbot/commit/b74f5b6c634c537d186173417c5480a7c7250ef9)を参照してください．
+変更箇所は以下のコミットを参照してください．（IFTTTの仕様変更にともない複数回修正してます．）
+
+1. [IFTTTへ対応](https://github.com/naka-tomo/slackbot/commit/b74f5b6c634c537d186173417c5480a7c7250ef9)
+1. [IFTTTの仕様変更への対応](https://github.com/naka-tomo/slackbot/commit/8731e4da1927550ee3aa6c461fc5b5bc347eb0c9)
 
 ---
 
