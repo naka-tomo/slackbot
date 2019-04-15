@@ -41,8 +41,9 @@ class MessageDispatcher(object):
     def dispatch_msg(self, msg):
         category = msg[0]
         msg = msg[1]
+        print(msg)
 
-        if msg["username"] == "IFTTT":
+        if "username" in msg and msg["username"] == "IFTTT":
             msg["text"] = msg['attachments'][0]["pretext"]
             msg["user"] = "AAAA"
 
