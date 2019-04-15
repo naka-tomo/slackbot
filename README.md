@@ -25,10 +25,7 @@ def listen_func(message):
 ```
 
 また，日本語へ対応するため，一部の文字列をユニコードにしています．
-変更箇所は以下のコミットを参照してください．（IFTTTの仕様変更にともない複数回修正してます．）
-
-1. [IFTTTへ対応](https://github.com/naka-tomo/slackbot/commit/b74f5b6c634c537d186173417c5480a7c7250ef9)
-1. [IFTTTの仕様変更への対応](https://github.com/naka-tomo/slackbot/commit/8731e4da1927550ee3aa6c461fc5b5bc347eb0c9)
+変更箇所は[このコミット](https://github.com/lins05/slackbot/compare/develop...naka-tomo:develop#diff-0d092cd5def737ec3f9e92d62ffa3730)を参照してください．（IFTTTの仕様変更にともない複数回修正してます．）
 
 ---
 
